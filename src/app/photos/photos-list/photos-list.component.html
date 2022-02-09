@@ -1,0 +1,16 @@
+<div class="text-center mt-3 mb-3">
+  <form>
+    <input
+      class="rounded"
+      type="search"
+      placeholder="search..."
+      autofocus
+      name="search"
+      [(ngModel)]="filter"
+    />
+  </form>
+</div>
+
+<ap-photos-grid
+  [photos]="photos | filterByDescription: filter"
+></ap-photos-grid>

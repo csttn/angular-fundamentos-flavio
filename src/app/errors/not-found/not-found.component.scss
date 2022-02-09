@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: red;
+  }
+}

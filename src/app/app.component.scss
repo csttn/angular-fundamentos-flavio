@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+
+  a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+.ativo {
+  display: none;
+}

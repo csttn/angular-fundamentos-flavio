@@ -4,6 +4,7 @@ import { PhotosListComponent } from './photos/photos-list/photos-list.component'
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PhotosListResolver } from './photos/photos-list/photos-list.resolver';
 
 const routes: Routes = [
   {
@@ -14,6 +15,9 @@ const routes: Routes = [
   {
     path: 'user/:userName',
     component: PhotosListComponent,
+    resolve: {
+      photos: PhotosListResolver,
+    },
   },
   {
     path: 'p/add',

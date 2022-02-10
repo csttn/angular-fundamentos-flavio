@@ -6,7 +6,7 @@
       placeholder="search..."
       autofocus
       name="search"
-      [(ngModel)]="filter"
+      (keyup)="onKeyUp($event)"
     />
   </form>
 </div>

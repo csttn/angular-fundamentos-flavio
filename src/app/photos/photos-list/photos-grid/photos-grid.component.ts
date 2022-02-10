@@ -22,7 +22,6 @@ export class PhotosGridComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['photos'].currentValue) {
       this.rows = this.groupColumns(this.photos, 3);
-      console.log(this.rows);
     }
   }
 

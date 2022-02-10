@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { ErrorsModule } from './errors/errors.module';
 import { PhotosModule } from './photos/photos.module';
 import { NgModule } from '@angular/core';
@@ -7,7 +8,13 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, PhotosModule, ErrorsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ErrorsModule,
+    PhotosModule,
+    FormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

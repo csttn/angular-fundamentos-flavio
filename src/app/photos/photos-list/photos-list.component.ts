@@ -1,11 +1,5 @@
 import { PhotoService } from './../photo/photo.service';
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IPhoto } from '../photo/photo.model';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
@@ -51,8 +45,11 @@ export class PhotosListComponent implements OnInit, OnDestroy {
     this.photoService
       .listFromUserPaginated(this.userName, ++this.currentPage)
       .subscribe((photos) => {
-        this.hasMorePhotos = photos.length > 0;
         this.photos = this.photos.concat(photos);
+        if (photos.length > 11) {
+          this.hasMorePhotos = true;
+        }
+        this.hasMorePhotos = false;
       });
   }
 }

@@ -14,3 +14,7 @@
 <ap-photos-grid
   [photos]="photos | filterByDescription: filter"
 ></ap-photos-grid>
+<ap-load-button
+  (click)="loadMorePhotos()"
+  [hasMorePhotos]="hasMorePhotos"
+></ap-load-button>

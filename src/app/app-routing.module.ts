@@ -9,7 +9,7 @@ import { PhotosListResolver } from './photos/photos-list/photos-list.resolver';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'user/:userName',
+    redirectTo: 'p/add',
     pathMatch: 'full',
   },
   {

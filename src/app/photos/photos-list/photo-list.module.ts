@@ -6,6 +6,7 @@ import { FilterByDescriptionPipe } from './filter-by-description.pipe';
 import { PhotoModule } from '../photo/photo.module';
 import { CommonModule } from '@angular/common';
 import { CardModule } from 'src/app/core/components/card/card.module';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { CardModule } from 'src/app/core/components/card/card.module';
     LoadButtonComponent,
     PhotosGridComponent,
     FilterByDescriptionPipe,
+    SearchComponent,
   ],
   imports: [PhotoModule, CommonModule, CardModule],
   exports: [PhotosListComponent, LoadButtonComponent, PhotosGridComponent],

@@ -10,38 +10,25 @@ import { Subject } from 'rxjs';
   templateUrl: './photos-list.component.html',
   styleUrls: ['./photos-list.component.scss'],
 })
-export class PhotosListComponent implements OnInit, OnDestroy {
+export class PhotosListComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private photoService: PhotoService
   ) {}
 
   photos: IPhoto[] = [];
-  public filter: string = '';
-  debounce: Subject<string> = new Subject<string>();
+  filter: string = '';
   hasMorePhotos: boolean = true;
   currentPage: number = 1;
   userName: string = '';
 
   ngOnInit(): void {
-    this.debounce.next(this.filter);
     this.userName = this.activatedRoute.snapshot.params['userName'];
     this.photos = this.activatedRoute.snapshot.data['photos'];
-    this.debounce
-      .pipe(debounceTime(300))
-      .subscribe((filter) => (this.filter = filter));
-  }
-
-  ngOnDestroy(): void {
-    this.debounce.unsubscribe();
-  }
-
-  onKeyUp(event: KeyboardEvent) {
-    let element = event.target as HTMLInputElement;
-    this.debounce.next(element.value);
   }
 
   loadMorePhotos() {
+    this.filter = '';
     this.photoService
       .listFromUserPaginated(this.userName, ++this.currentPage)
       .subscribe((photos) => {

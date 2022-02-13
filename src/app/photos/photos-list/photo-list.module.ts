@@ -1,3 +1,4 @@
+import { DarkenOnHoverModule } from './../../core/directives/darken-on-hover/darken-on-hover.module';
 import { PhotosGridComponent } from './photos-grid/photos-grid.component';
 import { LoadButtonComponent } from './load-button/load-button.component';
 import { PhotosListComponent } from './photos-list.component';
@@ -16,7 +17,7 @@ import { SearchComponent } from './search/search.component';
     FilterByDescriptionPipe,
     SearchComponent,
   ],
-  imports: [PhotoModule, CommonModule, CardModule],
+  imports: [PhotoModule, CommonModule, CardModule, DarkenOnHoverModule],
   exports: [PhotosListComponent, LoadButtonComponent, PhotosGridComponent],
 })
 export class PhotosListModule {}

@@ -1,4 +1,4 @@
-import { VMessageModule } from './../core/components/vmessage/vmessage.module';
+import { VMessageModule } from './../shared/components/vmessage/vmessage.module';
 import { SignInComponent } from './signin/signin.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

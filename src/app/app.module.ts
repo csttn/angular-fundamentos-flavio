@@ -1,3 +1,4 @@
+import { HomeModule } from './home/home.module';
 import { FormsModule } from '@angular/forms';
 import { ErrorsModule } from './errors/errors.module';
 import { PhotosModule } from './photos/photos.module';
@@ -14,6 +15,7 @@ import { AppComponent } from './app.component';
     ErrorsModule,
     PhotosModule,
     FormsModule,
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

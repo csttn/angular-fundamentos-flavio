@@ -31,7 +31,6 @@ export class AuthService {
           const authToken = response.headers.get('x-access-token');
           if (authToken) {
             this.userService.setToken(authToken);
-            console.log('authToken', authToken);
           }
         })
       );

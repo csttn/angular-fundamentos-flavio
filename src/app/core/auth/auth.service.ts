@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { TokenService } from './../token/token.service';
 import { tap } from 'rxjs/operators';
 
@@ -12,7 +13,7 @@ const API_URL = 'http://localhost:3000';
 export class AuthService {
   constructor(
     private httpClient: HttpClient,
-    private tokenService: TokenService
+    private userService: UserService
   ) {}
 
   authenticated(userName: string, password: string) {
@@ -29,7 +30,7 @@ export class AuthService {
         tap((response) => {
           const authToken = response.headers.get('x-access-token');
           if (authToken) {
-            this.tokenService.setToken(authToken);
+            this.userService.setToken(authToken);
             console.log('authToken', authToken);
           }
         })

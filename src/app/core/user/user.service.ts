@@ -14,6 +14,7 @@ export class UserService {
   }
 
   private userSubject = new BehaviorSubject<IUser | null>(null);
+  userName: string = '';
 
   setToken(token: string) {
     this.tokenService.setToken(token);
@@ -28,15 +29,24 @@ export class UserService {
     return this.userSubject.asObservable();
   }
 
+  isLogged() {
+    return this.tokenService.hasToken();
+  }
+
   logout() {
     this.tokenService.removeToken();
     this.userSubject.next(null);
+  }
+
+  getUserName() {
+    return this.userName;
   }
 
   decodeAndNotify() {
     const token = this.getToken();
     if (token) {
       const user = jwt_decode(token) as IUser;
+      this.userName = user.name;
       this.userSubject.next(user);
     }
   }

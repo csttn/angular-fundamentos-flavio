@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IUser } from '../user/user.model';
 import { UserService } from '../user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ap-header',
@@ -10,7 +11,12 @@ import { UserService } from '../user/user.service';
 export class HeaderComponent {
   user$: Observable<IUser | null>;
 
-  constructor(userService: UserService) {
-    this.user$ = userService.getUser();
+  constructor(private userService: UserService, private router: Router) {
+    this.user$ = this.userService.getUser();
+  }
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['']);
   }
 }

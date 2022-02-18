@@ -57,6 +57,6 @@ export class AuthGuard implements CanActivate {
 
       return allowedAccessToAuthenticatedRoute;
     }
-    return true;
+    return false;
   }
 }

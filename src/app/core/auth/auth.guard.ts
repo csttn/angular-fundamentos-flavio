@@ -28,15 +28,15 @@ export class AuthGuard implements CanActivate {
 
     const notAuthenticatedRoutes = ['/'];
 
-    if (!isAuthenticated) {
-      const allowedAccessUnauthenticatedRoute =
-        notAuthenticatedRoutes.includes(url);
+    // if (!isAuthenticated) {
+    //   const allowedAccessUnauthenticatedRoute =
+    //     notAuthenticatedRoutes.includes(url);
 
-      if (!allowedAccessUnauthenticatedRoute) {
-        this.router.navigate(['/']);
-      }
-      return allowedAccessUnauthenticatedRoute;
-    }
+    //   if (!allowedAccessUnauthenticatedRoute) {
+    //     this.router.navigate(['/']);
+    //   }
+    //   return allowedAccessUnauthenticatedRoute;
+    // }
 
     if (isAuthenticated) {
       const allowedAccessToAuthenticatedRoute =

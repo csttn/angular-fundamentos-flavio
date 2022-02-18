@@ -21,23 +21,32 @@ export class AuthGuard implements CanActivate {
     const url = state.url;
     const isAuthenticated = this.userService.isLogged();
 
-    const authenticatedRoutes = [
-      `/user/${this.userService.getUserName()}`,
-      '/p/add',
-    ];
+    // rotas para autenticados
+    const authenticatedRoutes = ['/p/add'];
+    // rotas para não autenticados
+    const notAuthenticatedRoutes = ['/', '/signup'];
+    // rotas publicas
+    const publicRoutes = ['user'];
 
-    const notAuthenticatedRoutes = ['/'];
+    const userPublicRouteVerify = url.split('/')[1];
 
-    // if (!isAuthenticated) {
-    //   const allowedAccessUnauthenticatedRoute =
-    //     notAuthenticatedRoutes.includes(url);
+    // verificando se a rota é publica
+    if (publicRoutes.includes(userPublicRouteVerify)) {
+      return true;
+    }
 
-    //   if (!allowedAccessUnauthenticatedRoute) {
-    //     this.router.navigate(['/']);
-    //   }
-    //   return allowedAccessUnauthenticatedRoute;
-    // }
+    // validação de rotas para usuarios não autenticados
+    if (!isAuthenticated) {
+      const allowedAccessUnauthenticatedRoute =
+        notAuthenticatedRoutes.includes(url);
 
+      if (!allowedAccessUnauthenticatedRoute) {
+        this.router.navigate(['/']);
+      }
+      return allowedAccessUnauthenticatedRoute;
+    }
+
+    // validação de rotas para usuarios autenticados
     if (isAuthenticated) {
       const allowedAccessToAuthenticatedRoute =
         authenticatedRoutes.includes(url);

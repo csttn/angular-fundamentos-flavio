@@ -16,8 +16,8 @@ export class SignInComponent implements OnInit {
   ) {}
 
   loginForm: FormGroup = this.formBuilder.group({
-    userName: ['', Validators.required],
-    password: ['', Validators.required],
+    userName: ['', [Validators.required, Validators.minLength(2)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
   @ViewChild('userNameInput') userNameInput!: ElementRef<HTMLInputElement>;

@@ -16,6 +16,13 @@ export class UserService {
   private userSubject = new BehaviorSubject<IUser | null>(null);
   userName: string = '';
 
+  createUser(
+    email: string,
+    fullName: string,
+    userName: string,
+    password: string
+  ) {}
+
   setToken(token: string) {
     this.tokenService.setToken(token);
     this.decodeAndNotify();

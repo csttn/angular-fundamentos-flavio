@@ -50,6 +50,14 @@
       formControlName="userName"
     />
     <ap-vmessage
+      *ngIf="signUpForm.get('userName')?.hasError('userNameTaken')"
+      message="User Name Taken!"
+    >
+    </ap-vmessage>
+    <small *ngIf="signUpForm.get('userName')?.valid" class="text-success"
+      >User available</small
+    >
+    <ap-vmessage
       *ngIf="signUpForm.get('userName')?.hasError('required')"
       message="user name is required!"
     >
@@ -65,7 +73,7 @@
     >
     </ap-vmessage>
     <ap-vmessage
-      *ngIf="signUpForm.get('userName')?.hasError('pattern')"
+      *ngIf="signUpForm.get('userName')?.hasError('lowerCase')"
       message="user name pattern not valid!"
     >
     </ap-vmessage>

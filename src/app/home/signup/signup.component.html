@@ -103,7 +103,10 @@
     </ap-vmessage>
   </div>
 
-  <button [disabled]="!signUpForm.valid" class="btn btn-primary btn-block">
+  <button
+    [disabled]="!signUpForm.valid || signUpForm.pending"
+    class="btn btn-primary btn-block"
+  >
     Register
   </button>
 

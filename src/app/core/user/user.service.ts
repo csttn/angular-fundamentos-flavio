@@ -1,9 +1,13 @@
+import { NewUser } from './../../home/signup/new-user';
 import { TokenService } from './../token/token.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { IUser } from './user.model';
 
 import jwt_decode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+
+const API_URL = 'http://localhost:3000';
 
 @Injectable({
   providedIn: 'root',
@@ -15,13 +19,6 @@ export class UserService {
 
   private userSubject = new BehaviorSubject<IUser | null>(null);
   userName: string = '';
-
-  createUser(
-    email: string,
-    fullName: string,
-    userName: string,
-    password: string
-  ) {}
 
   setToken(token: string) {
     this.tokenService.setToken(token);

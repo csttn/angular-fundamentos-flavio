@@ -1,4 +1,4 @@
-import { UserService } from './../../core/user/user.service';
+import { NewUser } from './new-user';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,13 +8,10 @@ const API_URL = 'http://localhost:3000';
   providedIn: 'root',
 })
 export class SignUpService {
-  constructor(
-    private userService: UserService,
-    private httpClient: HttpClient
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
-  signUp(email: string, fullName: string, userName: string, password: string) {
-    return this.userService.createUser(email, fullName, userName, password);
+  signUp(newUser: NewUser) {
+    return this.httpClient.post(`${API_URL}/user/signup`, newUser);
   }
 
   checkUserNameTaken(userName: string) {

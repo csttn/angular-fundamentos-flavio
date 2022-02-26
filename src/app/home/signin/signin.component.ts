@@ -22,7 +22,10 @@ export class SignInComponent implements OnInit {
 
   @ViewChild('userNameInput') userNameInput!: ElementRef<HTMLInputElement>;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.platformDetecService.isPlatformBrowser() &&
+      this.userNameInput.nativeElement.focus();
+  }
 
   handleSubmit() {
     const userName = this.loginForm.value.userName;

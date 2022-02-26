@@ -8,17 +8,23 @@ import { PhotosListComponent } from './photos/photos-list/photos-list.component'
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PhotosListResolver } from './photos/photos-list/photos-list.resolver';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SignInComponent,
+    component: HomeComponent,
     canActivate: [AuthGuard],
-  },
-  {
-    path: 'signup',
-    component: SignUpComponent,
-    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: SignInComponent,
+      },
+      {
+        path: 'signup',
+        component: SignUpComponent,
+      },
+    ],
   },
   {
     path: 'user/:userName',

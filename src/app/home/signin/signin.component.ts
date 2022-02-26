@@ -8,23 +8,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './signin.component.html',
 })
 export class SignInComponent implements OnInit {
+  @ViewChild('userNameInput')
+  userNameInput: ElementRef<HTMLInputElement> | undefined;
+
+  loginForm: FormGroup = this.formBuilder.group({});
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private platformDetecService: PlatformDetectorService
+    private platformDetectService: PlatformDetectorService
   ) {}
 
-  loginForm: FormGroup = this.formBuilder.group({
-    userName: ['', [Validators.required, Validators.minLength(2)]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-  });
-
-  @ViewChild('userNameInput') userNameInput!: ElementRef<HTMLInputElement>;
-
   ngOnInit(): void {
-    this.platformDetecService.isPlatformBrowser() &&
-      this.userNameInput.nativeElement.focus();
+    this.loginForm = this.formBuilder.group({
+      userName: ['', [Validators.required, Validators.minLength(2)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    });
+
+    if (this.userNameInput) {
+      this.platformDetectService.isPlatformBrowser() &&
+        this.userNameInput.nativeElement.focus();
+    }
   }
 
   handleSubmit() {
@@ -39,8 +44,8 @@ export class SignInComponent implements OnInit {
       error: (err) => {
         console.log(err);
         this.loginForm.reset();
-        this.platformDetecService.isPlatformBrowser() &&
-          this.userNameInput.nativeElement.focus();
+        this.platformDetectService.isPlatformBrowser() &&
+          this.userNameInput?.nativeElement.focus();
       },
     });
   }

@@ -28,6 +28,11 @@
       message="Password is required!"
     >
     </ap-vmessage>
+    <ap-vmessage
+      *ngIf="loginForm.get('password')?.hasError('minlength')"
+      message="password is minlength!"
+    >
+    </ap-vmessage>
   </div>
 
   <button

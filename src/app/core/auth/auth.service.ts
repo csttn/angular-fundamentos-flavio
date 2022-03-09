@@ -1,5 +1,4 @@
 import { UserService } from './../user/user.service';
-import { TokenService } from './../token/token.service';
 import { tap } from 'rxjs/operators';
 
 import { HttpClient } from '@angular/common/http';

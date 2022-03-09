@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'ap-signup',
   templateUrl: './signup.component.html',
+  providers: [UserNotTakenValidatorService],
 })
 export class SignUpComponent implements OnInit {
   @ViewChild('emailInput') emailInput: ElementRef<HTMLInputElement> | undefined;

@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
     // rotas para autenticados
     const authenticatedRoutes = ['/p/add'];
     // rotas para não autenticados
-    const notAuthenticatedRoutes = ['/', '/signup'];
+    const notAuthenticatedRoutes = ['/home', '/signup'];
     // rotas publicas
     const publicRoutes = ['user'];
 

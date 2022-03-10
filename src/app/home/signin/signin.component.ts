@@ -30,7 +30,7 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       userName: ['', [Validators.required, Validators.minLength(2)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.maxLength(8)]],
     });
 
     this.platformDetectService.isPlatformBrowser()

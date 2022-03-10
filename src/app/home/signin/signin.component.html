@@ -33,6 +33,11 @@
       message="password is minlength!"
     >
     </ap-vmessage>
+    <ap-vmessage
+      *ngIf="loginForm.get('password')?.hasError('maxlength')"
+      message="password is maxlength!"
+    >
+    </ap-vmessage>
   </div>
 
   <button

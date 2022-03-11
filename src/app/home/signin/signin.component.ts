@@ -1,14 +1,7 @@
 import { PlatformDetectorService } from './../../core/platform/platform-detector.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
-import {
-  Component,
-  ElementRef,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -30,7 +23,7 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       userName: ['', [Validators.required, Validators.minLength(2)]],
-      password: ['', [Validators.required, Validators.maxLength(8)]],
+      password: ['', [Validators.required, Validators.maxLength(14)]],
     });
 
     this.platformDetectService.isPlatformBrowser()

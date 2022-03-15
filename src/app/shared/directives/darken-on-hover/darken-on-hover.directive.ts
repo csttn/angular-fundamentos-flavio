@@ -3,14 +3,17 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnInit,
   Renderer2,
 } from '@angular/core';
 
 @Directive({
   selector: '[apDarkenOnHover]',
 })
-export class DarkenOnHoverDirective {
-  constructor(private el: ElementRef, private render: Renderer2) {
+export class DarkenOnHoverDirective implements OnInit {
+  constructor(private el: ElementRef, private render: Renderer2) {}
+
+  ngOnInit(): void {
     this.render.setStyle(this.el.nativeElement, 'transition', 'all 0.5s');
   }
 

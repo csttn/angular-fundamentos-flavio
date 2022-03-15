@@ -1,5 +1,5 @@
 import { TokenService } from './../token/token.service';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { IUser } from './user.model';
 
@@ -8,11 +8,12 @@ import jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  constructor(private tokenService: TokenService) {
+export class UserService implements OnInit {
+  constructor(private tokenService: TokenService) {}
+
+  ngOnInit() {
     this.tokenService.hasToken() && this.decodeAndNotify();
   }
-
   private userSubject = new BehaviorSubject<IUser | null>(null);
   userName: string = '';
 

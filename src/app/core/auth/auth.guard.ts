@@ -1,3 +1,5 @@
+import { NotAutenticationGuard } from './not-autentication.guard';
+import { RequiresAutenticationGuard } from './requires-autentication.guard';
 import { ignoreElements, Observable } from 'rxjs';
 import { UserService } from './../user/user.service';
 import { Injectable } from '@angular/core';
@@ -21,41 +23,34 @@ export class AuthGuard implements CanActivate {
     const url = state.url;
     const isAuthenticated = this.userService.isLogged();
 
-    // rotas para autenticados
-    const authenticatedRoutes = ['/p/add'];
-    // rotas para não autenticados
-    const notAuthenticatedRoutes = ['/home', '/signup'];
     // rotas publicas
     const publicRoutes = ['user'];
 
     const userPublicRouteVerify = url.split('/')[1];
 
-    // verificando se a rota é publica
+    // verificando rotas publicas
     if (publicRoutes.includes(userPublicRouteVerify)) {
       return true;
     }
 
     // validação de rotas para usuarios não autenticados
     if (!isAuthenticated) {
-      const allowedAccessUnauthenticatedRoute =
-        notAuthenticatedRoutes.includes(url);
+      const notAutenticationGuard = new NotAutenticationGuard(
+        this.userService,
+        this.router
+      );
 
-      if (!allowedAccessUnauthenticatedRoute) {
-        this.router.navigate(['/']);
-      }
-      return allowedAccessUnauthenticatedRoute;
+      return notAutenticationGuard.canActivate(route, state);
     }
 
     // validação de rotas para usuarios autenticados
     if (isAuthenticated) {
-      const allowedAccessToAuthenticatedRoute =
-        authenticatedRoutes.includes(url);
+      const requiresAutenticationGuard = new RequiresAutenticationGuard(
+        this.userService,
+        this.router
+      );
 
-      if (!allowedAccessToAuthenticatedRoute) {
-        this.router.navigate(['/user', this.userService.getUserName()]);
-      }
-
-      return allowedAccessToAuthenticatedRoute;
+      return requiresAutenticationGuard.canActivate(route, state);
     }
     return false;
   }

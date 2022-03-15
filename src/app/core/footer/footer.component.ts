@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
   templateUrl: './footer.component.html',
 })
 export class FooterComponent implements OnInit {
-  user$: Observable<IUser | null>;
+  user$: Observable<IUser | null> | undefined;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
     this.user$ = this.userService.getUser();
   }
-
-  ngOnInit() {}
 }

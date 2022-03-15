@@ -8,11 +8,12 @@ import jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  constructor(private tokenService: TokenService) {
+export class UserService implements OnInit {
+  constructor(private tokenService: TokenService) {}
+
+  ngOnInit() {
     this.tokenService.hasToken() && this.decodeAndNotify();
   }
-
   private userSubject = new BehaviorSubject<IUser | null>(null);
   userName: string = '';
 

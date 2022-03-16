@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
     const isAuthenticated = this.userService.isLogged();
 
     // rotas publicas
-    const publicRoutes = ['user'];
+    const publicRoutes = ['user', 'p/1'];
 
     const userPublicRouteVerify = url.split('/')[1];
 

@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'ap-photo-comments',
   templateUrl: './photo-comments.component.html',
+  styleUrls: ['./photo-comments.component.scss'],
 })
 export class PhotoCommentsComponent implements OnInit {
   @Input() photoId!: number;

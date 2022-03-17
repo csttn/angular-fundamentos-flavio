@@ -48,4 +48,8 @@ export class PhotoService {
   addLike(photoId: number) {
     return this.http.post(`${API}/photos/${photoId}/like`, {}, {});
   }
+
+  removePhoto(photoId: number) {
+    return this.http.delete(`${API}/photos/${photoId}`);
+  }
 }

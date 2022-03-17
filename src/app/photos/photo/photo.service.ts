@@ -39,9 +39,13 @@ export class PhotoService {
     return this.http.get<IPhotoComment[]>(`${API}/photos/${photoId}/comments`);
   }
 
-  addComment(photoId: number, comment: string) {
+  addComment(photoId: number, commentText: string) {
     return this.http.post(`${API}/photos/${photoId}/comments`, {
-      comment,
+      commentText,
     });
+  }
+
+  addLike(photoId: number) {
+    return this.http.post(`${API}/photos/${photoId}/like`, {}, {});
   }
 }

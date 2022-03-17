@@ -21,7 +21,7 @@
         <textarea formControlName="comment" class="form-control"></textarea>
         <div class="input-group-append">
           <button
-            [disabled]="!commentForm.valid || commentForm.pending"
+            [disabled]="commentForm.invalid || commentForm.pending"
             type="submit"
             class="btn btn-primary pull-left"
           >

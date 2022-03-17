@@ -24,7 +24,6 @@ export class PhotoDetailsComponent implements OnInit {
 
   remove() {
     this.photoService.removePhoto(this.photoId).subscribe(() => {
-      console.log('Foto removida com sucesso');
       this.router.navigate(['/']);
     });
   }

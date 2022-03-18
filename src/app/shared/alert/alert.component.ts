@@ -10,10 +10,11 @@ import { Alert, AlertType } from './alert';
 export class AlertComponent implements OnInit {
   constructor(private alertService: AlertService) {
     this.alertService.getAlert().subscribe((alert) => {
-      if (!alert) {
+      if (!alert || alert.alertType === AlertType.DESTROY) {
         this.alerts = [];
         return;
       }
+
       this.alerts.push(alert);
       setTimeout(() => this.removeAlert(alert), this.timeout);
     });
@@ -24,7 +25,7 @@ export class AlertComponent implements OnInit {
   alerts: Alert[] = [];
 
   removeAlert(alerToRemove: Alert) {
-    this.alerts = this.alerts.filter((x) => x !== alerToRemove);
+    this.alerts = this.alerts.filter((alerts) => alerts !== alerToRemove);
   }
 
   getAlertClass(alert: Alert) {
@@ -34,13 +35,15 @@ export class AlertComponent implements OnInit {
 
     switch (alert.alertType) {
       case AlertType.SUCCESS:
-        return 'alert alert-success';
+        return 'alert text-center alert alert-success';
       case AlertType.ERROR:
-        return 'alert alert-danger';
+        return 'alert text-center alert alert-danger';
       case AlertType.INFO:
-        return 'alert alert-info';
+        return 'alert text-center alert alert-info';
       case AlertType.WARNING:
-        return 'alert alert-warning';
+        return 'alert text-center alert alert-warning';
+      case AlertType.DESTROY:
+        return;
     }
   }
 

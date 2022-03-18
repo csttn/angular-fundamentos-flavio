@@ -14,4 +14,5 @@ export enum AlertType {
   ERROR,
   INFO,
   WARNING,
+  DESTROY,
 }

@@ -1,5 +1,4 @@
 import { CoreModule } from './core/core.module';
-import { HomeModule } from './home/home.module';
 import { FormsModule } from '@angular/forms';
 import { ErrorsModule } from './errors/errors.module';
 import { PhotosModule } from './photos/photos.module';

@@ -3,6 +3,7 @@ import { PhotoService } from './../photo/photo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPhoto } from './../photo/photo.model';
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
 @Component({
   templateUrl: './photo-details.component.html',
@@ -14,7 +15,8 @@ export class PhotoDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private photoService: PhotoService
+    private photoService: PhotoService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -23,8 +25,14 @@ export class PhotoDetailsComponent implements OnInit {
   }
 
   remove() {
-    this.photoService.removePhoto(this.photoId).subscribe(() => {
-      this.router.navigate(['/']);
+    this.photoService.removePhoto(this.photoId).subscribe({
+      next: () => {
+        this.alertService.success('Photo removed!');
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.alertService.warning('Could not delete the photo!');
+      },
     });
   }
 }

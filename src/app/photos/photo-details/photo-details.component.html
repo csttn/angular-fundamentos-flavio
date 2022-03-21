@@ -6,13 +6,13 @@
     <div class="col-md-4 p-4">
       <small>
         <p class="text-left break-word">{{ photo.description }}</p>
-        <div class="text-left mb-4">
+        <div class="text-left mb-4" *ngIf="likes$ | async as like">
           <i
-            class="fa fa-heart-o fa-2x mr-2 pull-left"
+            class="fa fa-heart-o fa-2x mr-2 pull-left text-danger"
             loggedOnly
-            (click)="like(photo)"
+            (click)="AddLike(photo)"
           >
-            {{ photo.likes }}
+            {{ like }}
           </i>
           <i class="fa fa-comment-o fa-2x mr-2 ml-2"></i>{{ photo.comments }}
           <i

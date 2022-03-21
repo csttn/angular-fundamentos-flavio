@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { PhotoService } from './../photo/photo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPhoto } from './../photo/photo.model';
@@ -13,6 +13,8 @@ export class PhotoDetailsComponent implements OnInit {
   photo$!: Observable<IPhoto>;
   photoId!: number;
 
+  likes$!: Observable<number>;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -24,6 +26,7 @@ export class PhotoDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.photoId = this.route.snapshot.params['photoId'];
     this.photo$ = this.photoService.findById(this.photoId);
+    this.likes$ = this.photo$.pipe(map((p) => p.likes));
     this.photo$.subscribe({
       error: () => {
         this.router.navigate(['not-found']);
@@ -43,16 +46,19 @@ export class PhotoDetailsComponent implements OnInit {
     });
   }
 
-  like(photo: IPhoto) {
+  AddLike(photo: IPhoto) {
     this.photoService.addLike(photo.id).subscribe({
       next: (liked) => {
-        console.log(liked);
         if (liked) {
-          this.photo$ = this.photoService.findById(photo.id);
+          this.likes$ = this.photoService
+            .findById(photo.id)
+            .pipe(map((p) => p.likes));
+        } else {
+          this.alertService.error('Não é possível curtir a foto duas vezes!');
         }
       },
       error: (err) => {
-        this.alertService.error('Não é possível curtir a foto duas vezes!');
+        this.alertService.error('erro inesperado ao curtir a foto!');
       },
     });
   }

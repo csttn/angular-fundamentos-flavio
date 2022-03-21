@@ -14,12 +14,17 @@
   <div class="mt-4">
     <form [formGroup]="commentForm" (submit)="saveComment()">
       <div class="input-group">
-        <textarea formControlName="comment" class="form-control"></textarea>
+        <textarea
+          formControlName="comment"
+          class="form-control"
+          loggedOnly
+        ></textarea>
         <div class="input-group-append">
           <button
             [disabled]="commentForm.invalid || commentForm.pending"
             type="submit"
             class="btn btn-primary pull-left"
+            loggedOnly
           >
             Publish
           </button>

@@ -42,4 +42,17 @@ export class PhotoDetailsComponent implements OnInit {
       },
     });
   }
+
+  like(photo: IPhoto) {
+    this.photoService.addLike(photo.id).subscribe({
+      next: (liked) => {
+        if (liked) {
+          this.photo$ = this.photoService.findById(photo.id);
+        }
+      },
+      error: (err) => {
+        this.alertService.error('Não é possível curtir a foto duas vezes!');
+      },
+    });
+  }
 }

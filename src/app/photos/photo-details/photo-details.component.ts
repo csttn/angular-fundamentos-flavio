@@ -46,6 +46,7 @@ export class PhotoDetailsComponent implements OnInit {
   like(photo: IPhoto) {
     this.photoService.addLike(photo.id).subscribe({
       next: (liked) => {
+        console.log(liked);
         if (liked) {
           this.photo$ = this.photoService.findById(photo.id);
         }

@@ -4,7 +4,9 @@ import { catchError, map, of, throwError } from 'rxjs';
 import { IPhotoComment } from './photo.comment';
 import { IPhoto } from './photo.model';
 
-const API = 'http://localhost:3000';
+import { environment } from 'src/environments/environment';
+
+const API_URL = environment.Apiurl;
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +15,12 @@ export class PhotoService {
   constructor(private http: HttpClient) {}
 
   listFromUSer(userName: string) {
-    return this.http.get<IPhoto[]>(`${API}/${userName}/photos`);
+    return this.http.get<IPhoto[]>(`${API_URL}/${userName}/photos`);
   }
 
   listFromUserPaginated(userName: string, page: number) {
     const params = new HttpParams().append('page', page.toString());
-    return this.http.get<IPhoto[]>(`${API}/${userName}/photos`, {
+    return this.http.get<IPhoto[]>(`${API_URL}/${userName}/photos`, {
       params,
     });
   }
@@ -29,34 +31,35 @@ export class PhotoService {
     formData.append('allowComments', allowComments ? 'true' : 'false');
     formData.append('imageFile', file);
 
-    return this.http.post(`${API}/photos/upload`, formData);
+    return this.http.post(`${API_URL}/photos/upload`, formData);
   }
 
   findById(photoId: number) {
-    return this.http.get<IPhoto>(`${API}/photos/${photoId}`);
+    return this.http.get<IPhoto>(`${API_URL}/photos/${photoId}`);
   }
 
   getComments(photoId: number) {
-    return this.http.get<IPhotoComment[]>(`${API}/photos/${photoId}/comments`);
+    return this.http.get<IPhotoComment[]>(
+      `${API_URL}/photos/${photoId}/comments`
+    );
   }
 
   addComment(photoId: number, commentText: string) {
-    return this.http.post(`${API}/photos/${photoId}/comments`, {
+    return this.http.post(`${API_URL}/photos/${photoId}/comments`, {
       commentText,
     });
   }
 
   addLike(photoId: number) {
-    return this.http.post(`${API}/photos/${photoId}/like`, {}, {});
-  }
-
-  removePhoto(photoId: number) {
     return (
       this.http
-        .post(`${API}/photos/${photoId}/like`, {
-          observer: 'response',
-        })
-        // conversão da resposta para um observable boolean
+        .post(
+          `${API_URL}/photos/${photoId}/like`,
+          {},
+          {
+            observe: 'response',
+          }
+        ) // conversão da resposta para um observable boolean
         .pipe(map((response) => true))
         // se der erro, e o erro for 304 (not modified), retorna false, se for diferente, retorna o erro
         .pipe(
@@ -65,5 +68,9 @@ export class PhotoService {
           })
         )
     );
+  }
+
+  removePhoto(photoId: number) {
+    return this.http.delete(`${API_URL}/photos/${photoId}/like`);
   }
 }

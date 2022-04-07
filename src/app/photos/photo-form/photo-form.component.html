@@ -56,15 +56,19 @@
         </label>
       </div>
 
-      <button
-        type="submit"
-        class="btn btn-primary btn-block"
-        [disabled]="!uploadForm.valid || uploadForm.pending"
-      >
-        Upload
-      </button>
-
-      <a class="btn btn-secondary btn-block">Cancel</a>
+      <div *ngIf="!percentDone; else showUpload">
+        <button
+          type="submit"
+          class="btn btn-primary btn-block"
+          [disabled]="!uploadForm.valid || uploadForm.pending"
+        >
+          Upload
+        </button>
+        <a class="btn btn-secondary btn-block">Cancel</a>
+      </div>
+      <ng-template #showUpload>
+        <div class="text-center display-4">uploading {{ percentDone }}%</div>
+      </ng-template>
     </div>
   </form>
 </div>

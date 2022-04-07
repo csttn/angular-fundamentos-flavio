@@ -13,6 +13,8 @@ export class PhotoDetailsComponent implements OnInit {
   photo$!: Observable<IPhoto>;
   photoId!: number;
 
+  isLiked: boolean = false;
+
   likes$!: Observable<number>;
 
   constructor(
@@ -26,12 +28,29 @@ export class PhotoDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.photoId = this.route.snapshot.params['photoId'];
     this.photo$ = this.photoService.findById(this.photoId);
-    this.likes$ = this.photo$.pipe(map((p) => p.likes));
+    this.likes$ = this.photo$.pipe(
+      map((p) => {
+        if (p.likes > 0) {
+          this.isLiked = true;
+        }
+        return p.likes;
+      })
+    );
+
     this.photo$.subscribe({
       error: () => {
         this.router.navigate(['not-found']);
       },
     });
+
+    this.photoService
+      .findById(this.photoId)
+      .pipe(map((p) => console.log(p.likes)))
+      .subscribe({
+        next: (photo) => {
+          console.log('bla');
+        },
+      });
   }
 
   remove() {
